@@ -1,4 +1,4 @@
-package com.test;
+package com.socketTest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,17 +9,19 @@ public class SocketClientTest {
 	
 	public static void main(String[] args) {
 		try {
-			Socket socket=new Socket("127.0.0",3000);
+			Socket socket=new Socket("192.168.2.102",30000);
+			socket.setSoTimeout(10000);
 			//获取服务器端的流
 			String result="";
 			String line;
 			BufferedReader reader=new BufferedReader(new InputStreamReader(socket.getInputStream()));  
 			while((line=reader.readLine())!=null){
 			
-				result=line+"/n";
+				result=line+"\n";
 			}
 			reader.close();
 			socket.close();
+			System.out.println(result);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

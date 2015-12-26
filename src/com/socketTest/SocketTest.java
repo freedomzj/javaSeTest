@@ -1,4 +1,4 @@
-package com.test;
+package com.socketTest;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -11,7 +11,10 @@ public class SocketTest {
 		
 		
 		try {
-			ServerSocket ssocket=new ServerSocket(3000);
+			ServerSocket ssocket=new ServerSocket(30000);
+			if(!ssocket.isClosed()){
+				ssocket.close();
+			}
 			//通过循环不断的获取来自客户端的请求
 			while(true){
 				//每当客户端请求一个服务器端对应生成一个

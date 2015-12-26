@@ -1,4 +1,4 @@
-package com.test;
+package com.socketTest;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -80,8 +80,9 @@ public class GetPostTest {
 	
 	
 	public static void main(String[] args) {
-			String result= sendPost("http://www.gvglh.com/luhushop_login.htm", "username=zengjie&password=123456");
-			System.out.println(result);
+				String result= sendPost("http://192.168.2.102:8080/user_checkLogin.action", "username=admin&password=123456");
+				System.out.println(result);
+			
 	}
 	
 	

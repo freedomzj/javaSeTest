@@ -1,4 +1,4 @@
-package com.test;
+package com.socketTest;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
