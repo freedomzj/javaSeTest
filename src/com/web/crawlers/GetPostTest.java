@@ -1,4 +1,4 @@
-package com.socketTest;
+package com.web.crawlers;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -80,8 +80,12 @@ public class GetPostTest {
 	
 	
 	public static void main(String[] args) {
-				String result= sendPost("http://192.168.2.102:8080/user_checkLogin.action", "username=admin&password=123456");
-				System.out.println(result);
+		for (int i = 0; i < 1000000; i++) {
+			String result= sendGet("http://localhost/user/list/1", "username=admin&password=123456");
+			System.out.println(result);
+		}
+//				String result= sendGet("http://192.168.2.102:8080/user_checkLogin.action", "username=admin&password=123456");
+//				System.out.println(result);
 			
 	}
 	

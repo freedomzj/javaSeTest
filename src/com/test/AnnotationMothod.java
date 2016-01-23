@@ -3,13 +3,15 @@ import java.lang.annotation.Annotation;
 import com.annotation.RequestMapping;
 import com.annotation.TestAnnotation;
 import com.bean.BaseFruit;
-public class Test01 {
+public class AnnotationMothod {
 	
 	public static void main(String[] args)  {
+		
+		System.out.println(System.getProperty("java.io.tmpdir"));
 //		System.out.println(Apple.class.isAnnotationPresent(TestAnnotation.class)); 判断一个类是否被一个Annotation修饰
 		Class<BaseFruit> baseFruit=BaseFruit.class;
 		//java8新增获取方式getDeclaredAnnotationsByType 经过测试不支持原注解@Inherited(继承)
-	/*	TestAnnotation[] testannotation =baseFruit.getDeclaredAnnotationsByType(TestAnnotation.class);
+		TestAnnotation[] testannotation =baseFruit.getDeclaredAnnotationsByType(TestAnnotation.class);
 		for (TestAnnotation testAnnotation2 : testannotation) {
 			System.out.println(testAnnotation2.name());
 		}
@@ -43,7 +45,7 @@ public class Test01 {
 //		for (Annotation annotation : arrys) {
 //		System.out.println(annotation);	
 //		}
-		*/
+		
 		
 	}
 
