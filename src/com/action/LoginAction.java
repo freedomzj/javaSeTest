@@ -3,8 +3,7 @@ package com.action;
 import com.annotation.RequestMapping;
 
 @RequestMapping("/front")
-public class LoginAtion {
-	
+public class LoginAction {
 	
 	@RequestMapping("/login.htm")
 	public String loginUI(){
