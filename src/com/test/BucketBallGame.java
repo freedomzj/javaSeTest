@@ -1,9 +1,13 @@
 package com.test;
 
+import java.util.concurrent.locks.ReentrantLock;
+
 public class BucketBallGame {
 	
 	private int[] bucket={10000,10000};
 	private static boolean RIGHT_TO_LEFT;
+	ReentrantLock lock=new ReentrantLock();
+	
 	public static void main(String[] args) {
 		new BucketBallGame().doTransfers();
 	}
@@ -15,7 +19,10 @@ public class BucketBallGame {
 		}
 	}
 	
-	public synchronized void transfer(boolean direction,int numToTransfer){
+	public  void transfer(boolean direction,int numToTransfer){
+//		森个癞子
+//		效果等同与synchronized
+		lock.lock();
 		if(direction==RIGHT_TO_LEFT){
 			bucket[0]+=numToTransfer;
 			bucket[1]-=numToTransfer;
@@ -24,6 +31,8 @@ public class BucketBallGame {
 			bucket[1]+=numToTransfer;
 		}
 		System.out.println("total:"+(bucket[0]+bucket[1]));
+		
+		lock.unlock();
 	}
 	
 	private class TransferThread implements Runnable{
