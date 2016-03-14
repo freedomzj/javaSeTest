@@ -177,7 +177,7 @@ public class ClientDemo {
 				ta.append("¹Ø±Õ·þÎñÆ÷");
 			}
 		}
-
+		
 	}
 
 	private class BtnSendMsg implements ActionListener {
@@ -189,6 +189,7 @@ public class ClientDemo {
 		}
 
 		@Override
+		
 		public void actionPerformed(ActionEvent e) {
 //			if (SocketDemoTest.socketList != null
 //					&& SocketDemoTest.socketList.size() > 0) {
