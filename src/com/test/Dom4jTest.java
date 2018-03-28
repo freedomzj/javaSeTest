@@ -29,7 +29,7 @@ public class Dom4jTest {
 	}
 	
 	/**
-	 * ¸ù¾İdom4j²Ù×÷xmlÎÄ¼ş
+	 * æ ¹æ®dom4jæ“ä½œxmlæ–‡ä»¶
 	 * @return
 	 * @throws 
 	 */
@@ -37,7 +37,7 @@ public class Dom4jTest {
 	public static File makeDocument() throws Exception{
 		File file=new File("D://dom4j1.xml");
 		Document document= DocumentHelper.createDocument(); 
-		document.addComment("ÄÚ²¿ÎÄµµÇëÎğ´«ÔÄ");
+		document.addComment("å†…éƒ¨æ–‡æ¡£è¯·å‹¿ä¼ é˜…");
 		Element rootElement= document.addElement("root");
 		rootElement.addAttribute("language", "java");
 		for (int i = 1; i < 10000; i++) {
@@ -46,21 +46,21 @@ public class Dom4jTest {
 			Element element= parentElement.addElement("age");
 			element.addText("1");
 			Element element1= parentElement.addElement("sex");
-			element1.addText("ÄĞ");
+			element1.addText("ç”·");
 			Element element2= parentElement.addElement("username");
-			element2.addText("Ôø½Ü"+i);
+			element2.addText("æ›¾æ°"+i);
 		}
 		
-		 //Êä³öÈ«²¿Ô­Ê¼Êı¾İ£¬ÔÚ±àÒëÆ÷ÖĞÏÔÊ¾  
+		 //è¾“å‡ºå…¨éƒ¨åŸå§‹æ•°æ®ï¼Œåœ¨ç¼–è¯‘å™¨ä¸­æ˜¾ç¤º  
         OutputFormat format = OutputFormat.createPrettyPrint();  
-        format.setEncoding("UTF-8");//¸ù¾İĞèÒªÉèÖÃ±àÂë  
+        format.setEncoding("UTF-8");//æ ¹æ®éœ€è¦è®¾ç½®ç¼–ç   
         XMLWriter writer = new XMLWriter(System.out, format);  
         document.normalize();  
         writer.write(document);    
         writer.close();  
-        // Êä³öÈ«²¿Ô­Ê¼Êı¾İ£¬²¢ÓÃËüÉú³ÉĞÂµÄÎÒÃÇĞèÒªµÄXMLÎÄ¼ş  
+        // è¾“å‡ºå…¨éƒ¨åŸå§‹æ•°æ®ï¼Œå¹¶ç”¨å®ƒç”Ÿæˆæ–°çš„æˆ‘ä»¬éœ€è¦çš„XMLæ–‡ä»¶  
         XMLWriter writer2 = new XMLWriter(new FileWriter(file), format);  
-        writer2.write(document); //Êä³öµ½ÎÄ¼ş  
+        writer2.write(document); //è¾“å‡ºåˆ°æ–‡ä»¶  
         writer2.close();  
 		return file;
 	}
@@ -70,38 +70,38 @@ public class Dom4jTest {
 	    try {  
 	        SAXReader sax = new SAXReader();  
 	        Document xmlDoc = sax.read(file);  
-	        Element root = xmlDoc.getRootElement();//¸ù½Úµã  
+	        Element root = xmlDoc.getRootElement();//æ ¹èŠ‚ç‚¹  
 	        Iterator it = root.elementIterator();  
 	        while(it.hasNext()){  
 	            Element ele = (Element)it.next();  
 	            Attribute attribute = ele.attribute("type");  
 	            if(attribute.getStringValue().equals("Pending")){  
-	                attribute.setValue("sendread2");//ĞŞ¸ÄÊôĞÔ½ÚµãµÄÖµ  
+	                attribute.setValue("sendread2");//ä¿®æ”¹å±æ€§èŠ‚ç‚¹çš„å€¼  
 	            }  
 	  
 	            Attribute flowType = ele.attribute("flowType");  
-	            flowType.detach();//É¾³ıÄ³¸öÊôĞÔ  
+	            flowType.detach();//åˆ é™¤æŸä¸ªå±æ€§  
 	              
-	            ele.addAttribute("type", "Pending");//Ìí¼ÓÒ»¸öÊôĞÔ½Úµã  
+	            ele.addAttribute("type", "Pending");//æ·»åŠ ä¸€ä¸ªå±æ€§èŠ‚ç‚¹  
 	        }  
-	        Element new_cdata = root.addElement("new_cdata");//Ìí¼ÓÒ»¸öÔªËØ  
+	        Element new_cdata = root.addElement("new_cdata");//æ·»åŠ ä¸€ä¸ªå…ƒç´   
 	        new_cdata.addCDATA("tst&ree");  
 	          
-	        Element new_ele = root.addElement("new_ele");//Ìí¼ÓÒ»¸öÔªËØ  
+	        Element new_ele = root.addElement("new_ele");//æ·»åŠ ä¸€ä¸ªå…ƒç´   
 	        new_ele.addText("33434343");  
 	  
-	        Element obj = (Element)root.selectObject("//pro[@type='att']");//¸ù¾İXPath²éÕÒÔªËØ  
-	        obj.setText("²âÊÔdddddd");//ĞŞ¸ÄÔªËØµÄÖµ ¼´text½Úµã  
-	             //Êä³öÈ«²¿Ô­Ê¼Êı¾İ£¬ÔÚ±àÒëÆ÷ÖĞÏÔÊ¾  
+	        Element obj = (Element)root.selectObject("//pro[@type='att']");//æ ¹æ®XPathæŸ¥æ‰¾å…ƒç´   
+	        obj.setText("æµ‹è¯•dddddd");//ä¿®æ”¹å…ƒç´ çš„å€¼ å³textèŠ‚ç‚¹  
+	             //è¾“å‡ºå…¨éƒ¨åŸå§‹æ•°æ®ï¼Œåœ¨ç¼–è¯‘å™¨ä¸­æ˜¾ç¤º  
 	           OutputFormat format = OutputFormat.createPrettyPrint();  
 	           format.setEncoding("GBK");  
 	           XMLWriter writer = new XMLWriter(System.out, format);  
 	           writer.write(xmlDoc);    
 	           writer.close();  
-	           // Êä³öÈ«²¿Ô­Ê¼Êı¾İ£¬²¢ÓÃËüÉú³ÉĞÂµÄÎÒÃÇĞèÒªµÄXMLÎÄ¼ş  
+	           // è¾“å‡ºå…¨éƒ¨åŸå§‹æ•°æ®ï¼Œå¹¶ç”¨å®ƒç”Ÿæˆæ–°çš„æˆ‘ä»¬éœ€è¦çš„XMLæ–‡ä»¶  
 	           XMLWriter writer2 = new XMLWriter(new FileWriter(new File(  
 	             "test.xml")), format);  
-	           writer2.write(xmlDoc); //Êä³öµ½ÎÄ¼ş  
+	           writer2.write(xmlDoc); //è¾“å‡ºåˆ°æ–‡ä»¶  
 	           writer2.close();  
 	    } catch (DocumentException e) {  
 	        System.out.println(e.getMessage());  
@@ -114,94 +114,94 @@ public class Dom4jTest {
 	
 	
 	public static void readDom4j(File file) throws DocumentException{
-		SAXReader sax = new SAXReader();// ´´½¨Ò»¸öSAXReader¶ÔÏó
-//		File xmlFile = new File(file);// ¸ù¾İÖ¸¶¨µÄÂ·¾¶´´½¨file¶ÔÏó
-		Document document = sax.read(file);// »ñÈ¡document¶ÔÏó,Èç¹ûÎÄµµÎŞ½Úµã£¬Ôò»áÅ×³öExceptionÌáÇ°½áÊø
-		Element root = document.getRootElement();// »ñÈ¡¸ù½Úµã
-		getNodes1(root);// ´Ó¸ù½Úµã¿ªÊ¼±éÀúËùÓĞ½Úµã	
+		SAXReader sax = new SAXReader();// åˆ›å»ºä¸€ä¸ªSAXReaderå¯¹è±¡
+//		File xmlFile = new File(file);// æ ¹æ®æŒ‡å®šçš„è·¯å¾„åˆ›å»ºfileå¯¹è±¡
+		Document document = sax.read(file);// è·å–documentå¯¹è±¡,å¦‚æœæ–‡æ¡£æ— èŠ‚ç‚¹ï¼Œåˆ™ä¼šæŠ›å‡ºExceptionæå‰ç»“æŸ
+		Element root = document.getRootElement();// è·å–æ ¹èŠ‚ç‚¹
+		getNodes1(root);// ä»æ ¹èŠ‚ç‚¹å¼€å§‹éå†æ‰€æœ‰èŠ‚ç‚¹	
 	}
 	
 	/**
-	 *  //1.ÕÒµ½½ÚµãuserÉÏÃæidÎª5000µÄ½Úµã
-	 *2.ĞŞ¸ÄidÎª5000µÄusernameÎª Ôø½Üjava¹¥³ÇÊ¨
+	 *  //1.æ‰¾åˆ°èŠ‚ç‚¹userä¸Šé¢idä¸º5000çš„èŠ‚ç‚¹
+	 *2.ä¿®æ”¹idä¸º5000çš„usernameä¸º æ›¾æ°javaæ”»åŸç‹®
 	 * @param file
 	 * @return
 	 * @throws DocumentException
 	 */
 	public static void readDom4jByElementName(File file) throws Exception{
-		SAXReader sax = new SAXReader();// ´´½¨Ò»¸öSAXReader¶ÔÏó
-//		File xmlFile = new File(file);// ¸ù¾İÖ¸¶¨µÄÂ·¾¶´´½¨file¶ÔÏó
-		Document document = sax.read(file);// »ñÈ¡document¶ÔÏó,Èç¹ûÎÄµµÎŞ½Úµã£¬Ôò»áÅ×³öExceptionÌáÇ°½áÊø
-		Element root = document.getRootElement();// »ñÈ¡¸ù½Úµã
-	   getNodes1(root);// ´Ó¸ù½Úµã¿ªÊ¼±éÀúËùÓĞ½Úµã
+		SAXReader sax = new SAXReader();// åˆ›å»ºä¸€ä¸ªSAXReaderå¯¹è±¡
+//		File xmlFile = new File(file);// æ ¹æ®æŒ‡å®šçš„è·¯å¾„åˆ›å»ºfileå¯¹è±¡
+		Document document = sax.read(file);// è·å–documentå¯¹è±¡,å¦‚æœæ–‡æ¡£æ— èŠ‚ç‚¹ï¼Œåˆ™ä¼šæŠ›å‡ºExceptionæå‰ç»“æŸ
+		Element root = document.getRootElement();// è·å–æ ¹èŠ‚ç‚¹
+	   getNodes1(root);// ä»æ ¹èŠ‚ç‚¹å¼€å§‹éå†æ‰€æœ‰èŠ‚ç‚¹
 	   
 	   
-	   //Êä³öÈ«²¿Ô­Ê¼Êı¾İ£¬ÔÚ±àÒëÆ÷ÖĞÏÔÊ¾  
+	   //è¾“å‡ºå…¨éƒ¨åŸå§‹æ•°æ®ï¼Œåœ¨ç¼–è¯‘å™¨ä¸­æ˜¾ç¤º  
        OutputFormat format = OutputFormat.createPrettyPrint();  
        format.setEncoding("utf-8");  
        XMLWriter writer = new XMLWriter(System.out, format);  
        writer.write(document);    
        writer.close();  
-       // Êä³öÈ«²¿Ô­Ê¼Êı¾İ£¬²¢ÓÃËüÉú³ÉĞÂµÄÎÒÃÇĞèÒªµÄXMLÎÄ¼ş  
+       // è¾“å‡ºå…¨éƒ¨åŸå§‹æ•°æ®ï¼Œå¹¶ç”¨å®ƒç”Ÿæˆæ–°çš„æˆ‘ä»¬éœ€è¦çš„XMLæ–‡ä»¶  
        XMLWriter writer2 = new XMLWriter(new FileWriter(file), format);  
-       writer2.write(document); //Êä³öµ½ÎÄ¼ş  
+       writer2.write(document); //è¾“å‡ºåˆ°æ–‡ä»¶  
        writer2.close();  
        
 	}
 	
 	
 	/**
-	 * ´ÓÖ¸¶¨½Úµã¿ªÊ¼,µİ¹é±éÀúËùÓĞ×Ó½Úµã
+	 * ä»æŒ‡å®šèŠ‚ç‚¹å¼€å§‹,é€’å½’éå†æ‰€æœ‰å­èŠ‚ç‚¹
 	 * 
 	 * @author chenleixing
 	 */
 	public static void getNodes1(Element node) {
 		
 		
-		// µ±Ç°½ÚµãµÄÃû³Æ¡¢ÎÄ±¾ÄÚÈİºÍÊôĞÔ
-		if(node.getName().equals("username") && node.getTextTrim().equals("Ôø½Ü3") ){
-			node.setText("java¹¥³ÇÊ¨");
+		// å½“å‰èŠ‚ç‚¹çš„åç§°ã€æ–‡æœ¬å†…å®¹å’Œå±æ€§
+		if(node.getName().equals("username") && node.getTextTrim().equals("æ›¾æ°3") ){
+			node.setText("javaæ”»åŸç‹®");
 		}
-		System.out.println("µ±Ç°½ÚµãÃû³Æ£º" + node.getName());// µ±Ç°½ÚµãÃû³Æ
-		System.out.println("µ±Ç°½ÚµãµÄÄÚÈİ£º" + node.getTextTrim());// µ±Ç°½ÚµãÃû³Æ
-		List<Attribute> listAttr = node.attributes();// µ±Ç°½ÚµãµÄËùÓĞÊôĞÔµÄlist
-		for (Attribute attr : listAttr) {// ±éÀúµ±Ç°½ÚµãµÄËùÓĞÊôĞÔ
-			String name = attr.getName();// ÊôĞÔÃû³Æ
-			String value = attr.getValue();// ÊôĞÔµÄÖµ
-			System.out.println("ÊôĞÔÃû³Æ£º" + name + "ÊôĞÔÖµ£º" + value);
+		System.out.println("å½“å‰èŠ‚ç‚¹åç§°ï¼š" + node.getName());// å½“å‰èŠ‚ç‚¹åç§°
+		System.out.println("å½“å‰èŠ‚ç‚¹çš„å†…å®¹ï¼š" + node.getTextTrim());// å½“å‰èŠ‚ç‚¹åç§°
+		List<Attribute> listAttr = node.attributes();// å½“å‰èŠ‚ç‚¹çš„æ‰€æœ‰å±æ€§çš„list
+		for (Attribute attr : listAttr) {// éå†å½“å‰èŠ‚ç‚¹çš„æ‰€æœ‰å±æ€§
+			String name = attr.getName();// å±æ€§åç§°
+			String value = attr.getValue();// å±æ€§çš„å€¼
+			System.out.println("å±æ€§åç§°ï¼š" + name + "å±æ€§å€¼ï¼š" + value);
 		}
 
-		// µİ¹é±éÀúµ±Ç°½ÚµãËùÓĞµÄ×Ó½Úµã
-		List<Element> listElement = node.elements();// ËùÓĞÒ»¼¶×Ó½ÚµãµÄlist
-		for (Element e : listElement) {// ±éÀúËùÓĞÒ»¼¶×Ó½Úµã
-			getNodes1(e);// µİ¹é
+		// é€’å½’éå†å½“å‰èŠ‚ç‚¹æ‰€æœ‰çš„å­èŠ‚ç‚¹
+		List<Element> listElement = node.elements();// æ‰€æœ‰ä¸€çº§å­èŠ‚ç‚¹çš„list
+		for (Element e : listElement) {// éå†æ‰€æœ‰ä¸€çº§å­èŠ‚ç‚¹
+			getNodes1(e);// é€’å½’
 		}
 	}
 	
 	
 	
 	/**
-	 * ´ÓÖ¸¶¨½Úµã¿ªÊ¼,µİ¹é±éÀúËùÓĞ×Ó½Úµã
+	 * ä»æŒ‡å®šèŠ‚ç‚¹å¼€å§‹,é€’å½’éå†æ‰€æœ‰å­èŠ‚ç‚¹
 	 * 
 	 * @author chenleixing
 	 */
 	public static void getNodes(Element node) {
 		
 		
-		// µ±Ç°½ÚµãµÄÃû³Æ¡¢ÎÄ±¾ÄÚÈİºÍÊôĞÔ
-		System.out.println("µ±Ç°½ÚµãÃû³Æ£º" + node.getName());// µ±Ç°½ÚµãÃû³Æ
-		System.out.println("µ±Ç°½ÚµãµÄÄÚÈİ£º" + node.getTextTrim());// µ±Ç°½ÚµãÃû³Æ
-		List<Attribute> listAttr = node.attributes();// µ±Ç°½ÚµãµÄËùÓĞÊôĞÔµÄlist
-		for (Attribute attr : listAttr) {// ±éÀúµ±Ç°½ÚµãµÄËùÓĞÊôĞÔ
-			String name = attr.getName();// ÊôĞÔÃû³Æ
-			String value = attr.getValue();// ÊôĞÔµÄÖµ
-			System.out.println("ÊôĞÔÃû³Æ£º" + name + "ÊôĞÔÖµ£º" + value);
+		// å½“å‰èŠ‚ç‚¹çš„åç§°ã€æ–‡æœ¬å†…å®¹å’Œå±æ€§
+		System.out.println("å½“å‰èŠ‚ç‚¹åç§°ï¼š" + node.getName());// å½“å‰èŠ‚ç‚¹åç§°
+		System.out.println("å½“å‰èŠ‚ç‚¹çš„å†…å®¹ï¼š" + node.getTextTrim());// å½“å‰èŠ‚ç‚¹åç§°
+		List<Attribute> listAttr = node.attributes();// å½“å‰èŠ‚ç‚¹çš„æ‰€æœ‰å±æ€§çš„list
+		for (Attribute attr : listAttr) {// éå†å½“å‰èŠ‚ç‚¹çš„æ‰€æœ‰å±æ€§
+			String name = attr.getName();// å±æ€§åç§°
+			String value = attr.getValue();// å±æ€§çš„å€¼
+			System.out.println("å±æ€§åç§°ï¼š" + name + "å±æ€§å€¼ï¼š" + value);
 		}
 
-		// µİ¹é±éÀúµ±Ç°½ÚµãËùÓĞµÄ×Ó½Úµã
-		List<Element> listElement = node.elements();// ËùÓĞÒ»¼¶×Ó½ÚµãµÄlist
-		for (Element e : listElement) {// ±éÀúËùÓĞÒ»¼¶×Ó½Úµã
-			getNodes1(e);// µİ¹é
+		// é€’å½’éå†å½“å‰èŠ‚ç‚¹æ‰€æœ‰çš„å­èŠ‚ç‚¹
+		List<Element> listElement = node.elements();// æ‰€æœ‰ä¸€çº§å­èŠ‚ç‚¹çš„list
+		for (Element e : listElement) {// éå†æ‰€æœ‰ä¸€çº§å­èŠ‚ç‚¹
+			getNodes1(e);// é€’å½’
 		}
 	}
 }
