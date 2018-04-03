@@ -15,7 +15,7 @@ import javax.xml.bind.DatatypeConverter;
 public class JavaIo {
 
 	public static void main(String[] args) {
-//		new JavaIo().new myTestIO().run();
+		new JavaIo().new myTestIO().run();
 		for(String fileName: args){
 			new JavaIo().new DigestThread(fileName).start();
 		}

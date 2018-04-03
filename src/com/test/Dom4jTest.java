@@ -19,8 +19,8 @@ import org.dom4j.io.XMLWriter;
 public class Dom4jTest {
 	public static void main(String[] args) throws DocumentException {
 		try {
-//			File file= makeDocument();
-			readDom4jByElementName(new File("D://dom4j1.xml"));
+			File file= makeDocument();
+//			readDom4jByElementName(file);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -35,7 +35,7 @@ public class Dom4jTest {
 	 */
 
 	public static File makeDocument() throws Exception{
-		File file=new File("D://dom4j1.xml");
+		File file=new File(" /Users/zengjie/Desktop/dom4j1.xml");
 		Document document= DocumentHelper.createDocument(); 
 		document.addComment("内部文档请勿传阅");
 		Element rootElement= document.addElement("root");

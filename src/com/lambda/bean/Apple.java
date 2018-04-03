@@ -1,6 +1,6 @@
 package com.lambda.bean;
 
-public class Apple {
+public class Apple  extends Fruit{
 	
 	private String color;
 	
@@ -8,6 +8,10 @@ public class Apple {
 	
 	public Apple(){
 		
+	}
+	
+	public Apple(Integer width){
+		this.width=width;
 	}
 	
 	public Apple(String color, Integer width) {
