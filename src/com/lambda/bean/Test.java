@@ -22,6 +22,7 @@ import java.util.function.Supplier;
 
 import static java.util.Comparator.comparing;
 
+@SuppressWarnings("all")
 public class Test {
 
 	static Map<String, Function<Integer, Fruit>> map = new HashMap<>();

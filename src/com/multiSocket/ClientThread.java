@@ -18,7 +18,7 @@ public class ClientThread implements Runnable {
 	public void run() {
 		try {
 			String content = null;
-			// ²»¶ÏµØ¶ÁÈ¡SocketÊäÈëÁ÷ÖĞµÄÄÚÈİ£¬²¢½«ÕâĞ©ÄÚÈİ´òÓ¡Êä³ö
+			// ï¿½ï¿½ï¿½ÏµØ¶ï¿½È¡Socketï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½ï¿½İ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ©ï¿½ï¿½ï¿½İ´ï¿½Ó¡ï¿½ï¿½ï¿½
 			while ((content = br.readLine()) != null) {
 				System.out.println(content);
 			}
