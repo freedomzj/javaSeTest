@@ -1,4 +1,4 @@
-package com.lambda.bean;
+package com.lambda.test;
 
 import static java.util.stream.Collectors.toList;
 
@@ -19,6 +19,11 @@ import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+
+import com.lambda.bean.Apple;
+import com.lambda.bean.Fruit;
+import com.lambda.bean.Orange;
+import com.lambda.function.BufferedReaderProcessor;
 
 import static java.util.Comparator.comparing;
 
