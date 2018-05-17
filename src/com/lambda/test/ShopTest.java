@@ -1,7 +1,6 @@
 package com.lambda.test;
 
 import static java.util.stream.Collectors.toList;
-import static com.lambda.bean.Quote.parse;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +10,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadFactory;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.lambda.bean.Discount;
 import com.lambda.bean.Quote;
@@ -38,8 +38,8 @@ CompletableFuture灵活性更好,你可以像前文讨论的那样,依据等待/
 public class ShopTest {
 
 	static List<Shop> shops = Arrays.asList(new Shop("BestPrice"), new Shop("LetsSaveBig"), new Shop("MyFavoriteShop"),
-			new Shop("BuyItAll"), new Shop("shop1"), new Shop("shop2"), new Shop("shop3"), new Shop("shop4"), new Shop("shop5"),
-			new Shop("shop6"));
+			new Shop("BuyItAll"), new Shop("shop1"), new Shop("shop2"), new Shop("shop3"), new Shop("shop4"),
+			new Shop("shop5"), new Shop("shop6"));
 
 	/**
 	 * 创建一个线 程池,线程 池中线程的 数目为100 和商店数目 二者中较小 的一个值
@@ -55,6 +55,14 @@ public class ShopTest {
 			});
 
 	public static void main(String[] args) {
+		// Future和CompletableFuture测试
+		// System.out.println(findPrice("myPhone27S"));
+
+		// 响应CompletableFuture的completion事件
+		test();
+	}
+
+	public static void simpleTest() {
 		Shop shop = new Shop("BestShop");
 		long start = System.nanoTime();
 		Future<Double> futurePrice = shop.getPriceAsync("my favorite product");
@@ -77,7 +85,6 @@ public class ShopTest {
 		// 最后,如果所有有意义的 工作都已经完成,客户所有要执行的工作都依赖于商品价格时,再调用Future的get方法。
 		// 执行 了这个操作后,客户要么获得Future中封装的值(如果异步任务已经完成),要么发生阻塞,直 到该异步任务完成,期望的值能够访问。
 		start = System.nanoTime();
-		System.out.println(findPrice("myPhone27S"));
 		long duration = (System.nanoTime() - start) / 1_000_000;
 		System.out.println("Done in " + duration + " msecs");
 	}
@@ -140,12 +147,32 @@ public class ShopTest {
 		return priceFutures.stream().map(CompletableFuture::join).collect(toList());
 	}
 
-	public List<String> findPrices(String product) {
+	public static List<String> findPrices(String product) {
 		return shops.stream().map(shop -> shop.getFormatPrice(product)).map(Quote::parse) // 在Quote对象中
 																							// 对shop返回的字
 																							// 符串进行转换
 				.map(Discount::applyDiscount).collect(toList());// 联系Discount服
 																// 务,为每个Quote
 																// 申请折扣
+	}
+
+	// 响应CompletableFuture的completion事件 毫无疑问,现实世界中,你的应用访问各个远程服务时很可能遭遇无法预知的延迟,触发的 原因多种多样,从服务器的负荷到网络的延迟,
+	//有些甚至是源于远程服务如何评估你应用的商业 价值,即可能相对于其他的应用,你的应用每次查询的消耗时间更长
+	public static Stream<CompletableFuture<String>> findPricesStream(String product) {
+		return shops.stream().map(shop -> CompletableFuture.supplyAsync(() -> shop.getRandomFormatPrice(product), executor))
+				.map(future -> future.thenApply(Quote::parse)).map(future -> future.thenCompose(
+						quote -> CompletableFuture.supplyAsync(() -> Discount.applyDiscount(quote), executor)));
+	}
+
+	public static void test() {
+		long start = System.nanoTime();
+		@SuppressWarnings("rawtypes")
+		CompletableFuture[] futures = findPricesStream("myPhone27S")
+				.map(f -> f.thenAccept(s -> System.out
+						.println(s + " (done in " + ((System.nanoTime() - start) / 1_000_000) + " msecs)")))
+				.toArray(size -> new CompletableFuture[size]);
+		CompletableFuture.allOf(futures).join();
+		System.out.println("All shops have now responded in " + ((System.nanoTime() - start) / 1_000_000) + " msecs");
+
 	}
 }
