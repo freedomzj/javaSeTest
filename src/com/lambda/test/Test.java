@@ -44,6 +44,9 @@ public class Test {
 
 	public static void main(String[] args) {
 		
+		// 处理器数量
+		System.out.println(Runtime.getRuntime().availableProcessors());
+		
 		Apple applet= (Apple) giveMeFruit("aaa", 100);
 
 		List<Apple> inventory = Arrays.asList(new Apple("red", 100), new Apple("red", 200), new Apple("green", 160),
@@ -104,9 +107,9 @@ public class Test {
 			System.out.println(item.getColor());
 		});
 		// greenApple.forEach(item -> System.out.println(item.getColor()));
-
+		
 		File[] hiddenFiles = new File(".").listFiles(File::isHidden);
-
+		
 		try {
 			String result = processFile((BufferedReader br) -> br.readLine());
 			String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine());
