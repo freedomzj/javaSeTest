@@ -36,18 +36,17 @@ public class Test {
 		map.put("orange", Orange::new);
 	}
 
-	//不将构造函数实例化却能够引用它,这个功能有一些有趣的应用。例如,你可以使用Map来 将构造函数映射到字符串值。
-	///你可以创建一个giveMeFruit方法,给它一个String和一个 Integer,它就可以创建出不同重量的各种水果:
+	// 不将构造函数实例化却能够引用它,这个功能有一些有趣的应用。例如,你可以使用Map来 将构造函数映射到字符串值。
+	/// 你可以创建一个giveMeFruit方法,给它一个String和一个 Integer,它就可以创建出不同重量的各种水果:
 	public static Fruit giveMeFruit(String fruit, Integer weight) {
 		return map.get(fruit.toLowerCase()).apply(weight);
 	}
 
 	public static void main(String[] args) {
-		
+
 		// 处理器数量
 		System.out.println(Runtime.getRuntime().availableProcessors());
-		
-		Apple applet= (Apple) giveMeFruit("aaa", 100);
+		Apple applet = (Apple) giveMeFruit("aaa", 100);
 
 		List<Apple> inventory = Arrays.asList(new Apple("red", 100), new Apple("red", 200), new Apple("green", 160),
 				new Apple("black", 300));
@@ -107,9 +106,9 @@ public class Test {
 			System.out.println(item.getColor());
 		});
 		// greenApple.forEach(item -> System.out.println(item.getColor()));
-		
+
 		File[] hiddenFiles = new File(".").listFiles(File::isHidden);
-		
+
 		try {
 			String result = processFile((BufferedReader br) -> br.readLine());
 			String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine());

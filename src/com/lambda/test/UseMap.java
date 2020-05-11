@@ -11,6 +11,8 @@ import java.util.function.Predicate;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import com.lambda.bean.Apple;
+
 public class UseMap {
 	public static void main(String[] args) {
 		Map<String, Integer> pageVisits = new HashMap<>();
@@ -79,9 +81,7 @@ public class UseMap {
 		System.out.println(values.stream().mapToInt(UseMap::sumOfFactors).sum());
 
 		new Thread(() -> System.out.println("In another thread")).start();
-
 		totalSelectedValues(values, e -> e % 2 == 0);
-
 		Function<Integer, Predicate<Integer>> isGreaterThan = pivot -> candidate -> candidate > pivot;
 	}
 

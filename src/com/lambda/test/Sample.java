@@ -27,7 +27,8 @@ public class Sample {
 		
 		System.out.println(0.0 == -0.01);
 		Runnable runnable = create();
-
+//		Runnable runnable = () -> System.out.println(value);
+		
 		System.out.println("In main");
 		runnable.run();
 

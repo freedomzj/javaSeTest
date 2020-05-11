@@ -21,7 +21,6 @@ public class ValidatorTest {
 		
 		Validator validator1 = new Validator((String s) -> s.matches("[a-z]+"));
 		boolean b4 = validator1.validate("bbbb");
-		
 		System.out.println("b3:"+b3+"b4:"+b4);
 	}
 

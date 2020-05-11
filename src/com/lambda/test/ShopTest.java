@@ -54,13 +54,6 @@ public class ShopTest {
 				}
 			});
 
-	public static void main(String[] args) {
-		// Future和CompletableFuture测试
-		// System.out.println(findPrice("myPhone27S"));
-
-		// 响应CompletableFuture的completion事件
-		test();
-	}
 
 	public static void simpleTest() {
 		Shop shop = new Shop("BestShop");
@@ -160,8 +153,8 @@ public class ShopTest {
 	//有些甚至是源于远程服务如何评估你应用的商业 价值,即可能相对于其他的应用,你的应用每次查询的消耗时间更长
 	public static Stream<CompletableFuture<String>> findPricesStream(String product) {
 		return shops.stream().map(shop -> CompletableFuture.supplyAsync(() -> shop.getRandomFormatPrice(product), executor))
-				.map(future -> future.thenApply(Quote::parse)).map(future -> future.thenCompose(
-						quote -> CompletableFuture.supplyAsync(() -> Discount.applyDiscount(quote), executor)));
+				.map(future -> future.thenApply(Quote::parse))
+				.map(future -> future.thenCompose(quote -> CompletableFuture.supplyAsync(() -> Discount.applyDiscount(quote), executor)));
 	}
 
 	public static void test() {

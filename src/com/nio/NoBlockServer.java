@@ -12,11 +12,12 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Iterator;
 
-import freemarker.core.BuiltInForNodeEx;
 
 public class NoBlockServer {
 	
 	 public static void main(String[] args) throws IOException {
+
+	 	
 
 	        // 1.获取通道
 	        ServerSocketChannel server = ServerSocketChannel.open();

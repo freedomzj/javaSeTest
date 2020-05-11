@@ -17,7 +17,6 @@ public class FeedTest {
 		 f.registerObserver(new Guardian());
 		 f.registerObserver(new LeMonde());
 		
-
 		// Java 8 lambda方式 并且不需要显示的创建三个观察者
 		f.registerObserver((String tweet) -> {
 			if (tweet != null && tweet.contains("money")) {
